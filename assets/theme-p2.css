@@ -1,0 +1,135 @@
+/* =========================================================
+   PROPOSTA 2 - tema escuro, Sora + DM Sans, cantos arredondados
+   Aplica-se por cima de style.css (mesma estrutura e regras de diagramacao)
+   ========================================================= */
+:root{
+  --fh:"Sora",system-ui,sans-serif; --fb:"DM Sans",system-ui,sans-serif;
+  --dark:#1D1D1C; --dark2:#262624; --line-d:rgba(247,245,240,.12); --txt-d:rgba(247,245,240,.78);
+  --r:12px;
+}
+body{font-family:var(--fb)}
+h1,h2,h3{font-family:var(--fh);font-weight:300;letter-spacing:-.02em}
+h1 b,h2 b,h3 b{font-weight:600}
+h2 b{color:inherit}
+
+/* botoes em pilula */
+.btn{border-radius:999px;padding:0 26px}
+.btn.ghost{border-radius:999px}
+
+/* cabecalho escuro */
+.top{background:var(--dark);border-bottom:1px solid var(--line-d)}
+.top nav a{color:#F7F5F0}
+.burger span{background:#F7F5F0}
+.mmenu{background:var(--dark);border-top-color:var(--line-d)}
+.mmenu li a{color:#F7F5F0;border-bottom-color:var(--line-d)}
+
+/* hero: destaque em Sora 600 dourado (sem italico) */
+.big{font-family:var(--fh);font-weight:300;letter-spacing:-.025em}
+.big em{font-family:var(--fh);font-style:normal;font-weight:600;color:var(--gold);font-size:1em;letter-spacing:-.025em}
+.hero2 .lead{font-weight:300}
+
+/* secoes escuras (numeros, setores, empresa) */
+.warm{background:var(--dark);color:#F7F5F0}
+.warm h2,.warm h3{color:#F7F5F0}
+.warm .sub,.warm p:not(.eyebrow):not(.lead){color:var(--txt-d)}
+.warm .stext .lead{color:#F7F5F0}
+.eyebrow{color:var(--gold-deep)}
+.warm .eyebrow,.cbody .eyebrow{color:var(--gold)}
+.warm .btn.ghost{border-color:var(--line-d);color:#F7F5F0}
+
+/* numeros: cards translucidos arredondados */
+.nc{background:rgba(247,245,240,.04);border:1px solid var(--line-d);border-radius:var(--r);transition:transform .45s cubic-bezier(.2,.7,.2,1),border-color .3s,background .3s}
+.nc b{font-family:var(--fh);font-weight:300;color:#F7F5F0;letter-spacing:-.02em}
+.nc b i{color:var(--gold)!important}
+.nc span{color:var(--txt-d)}
+.nc:hover{transform:translateY(-6px);border-color:var(--gold);background:rgba(214,169,95,.07)}
+
+/* cards: base arredondada + "pop" dourado ao passar o mouse */
+.tile,.stile,.ophoto,.lg,.pimg,.gview,.sphoto,.cphoto,.form,.phero{border-radius:var(--r)}
+.phero{border-radius:0}
+.tile,.stile,.ocard .ophoto{border:2px solid transparent;transition:transform .5s cubic-bezier(.2,.7,.2,1),border-color .35s}
+.tile:hover,.stile:hover,.ocard:hover .ophoto{transform:translateY(-10px);border-color:var(--gold)}
+
+/* servicos: preto e branco -> colorido no hover, icone da coluna e seta em circulo */
+.tile img{filter:grayscale(1) contrast(1.05);transition:filter .6s,transform .6s}
+.tile:hover img{filter:none}
+.tile::before{content:"";position:absolute;left:50%;top:42%;width:46px;height:46px;margin:-23px 0 0 -23px;background:url("coluna.png") center/contain no-repeat;z-index:1;opacity:.85;transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .3s}
+.tile:hover::before{transform:translateY(-6px) scale(1.12);opacity:1}
+.tile h3{font-family:var(--fh);font-weight:600;font-size:20px;padding-right:44px}
+.tile .more{position:absolute;right:16px;bottom:18px;margin:0;width:36px;height:36px;border:1px solid rgba(255,255,255,.55);border-radius:50%;display:grid;place-items:center;font-size:0;text-decoration:none;transition:background .3s,border-color .3s,transform .3s}
+.tile .more .ico{width:16px;height:16px;transform:rotate(-45deg)}
+.tile:hover .more{background:var(--gold);border-color:var(--gold);color:var(--dark);transform:scale(1.08)}
+
+/* setores: cards arredondados, titulo dourado central, textura escura na secao */
+.stile .shade{background:rgba(20,20,19,.6)}
+.stile h3{font-family:var(--fh);font-weight:600;font-size:28px}
+.warm.topo::before{background-image:url("topo-escuro.svg");opacity:.14}
+
+/* obras (secao clara) */
+.otxt h3{font-family:var(--fh);font-weight:600;font-size:24px}
+
+/* empresa: grafismo da coluna (teste) */
+#empresa{overflow:hidden}
+#empresa .wrap.split{padding-right:clamp(20px,17vw,320px)}
+.colgraf{position:absolute;right:clamp(20px,4vw,72px);bottom:0;height:82%;width:clamp(90px,11vw,200px);display:flex;align-items:flex-end;justify-content:space-between;pointer-events:none}
+.colgraf::before{content:"";position:absolute;left:-12%;right:-12%;top:0;height:5%;background:var(--gold)}
+.colgraf::after{content:"";position:absolute;left:-4%;right:-4%;top:7%;height:4%;background:var(--gold);clip-path:polygon(0 0,100% 0,90% 100%,10% 100%)}
+.colgraf i{display:block;width:20%;height:84%;background:var(--gold)}
+.colgraf i:nth-child(2),.colgraf i:nth-child(3){width:13%;height:68%;margin-bottom:6%}
+.js .colgraf i{transform:scaleY(0);transform-origin:bottom;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.js #empresa.seen .colgraf i{transform:none}
+#empresa .sphoto{border-radius:var(--r);overflow:hidden}
+
+/* clientes (secao clara) */
+.lg{border-radius:10px;transition:transform .4s,border-color .3s}
+.lg:hover{transform:translateY(-4px);border-color:var(--gold)}
+
+/* contato escuro */
+.cbody{background:var(--dark);color:#F7F5F0}
+.cbody h2{color:#F7F5F0}
+.cbody .sub,.direct{color:var(--txt-d)}
+.cform label{color:#F7F5F0}
+.cform input,.cform select,.cform textarea{background:rgba(247,245,240,.05);border-color:var(--line-d);color:#F7F5F0;border-radius:8px}
+.cform select option{color:#1D1D1C}
+.cphoto{border-radius:0}
+
+/* paginas internas */
+.tabs a.on{border-bottom-color:var(--gold)}
+.frase{font-family:var(--fh);font-weight:600}
+.ent li::before{border-radius:2px}
+.finfo h1{font-family:var(--fh);font-weight:300}
+
+@media (max-width:900px){
+  #empresa .wrap.split{padding-right:20px}
+  .colgraf{display:none}
+  .tile:hover,.stile:hover,.ocard:hover .ophoto{transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .tile:hover,.stile:hover,.ocard:hover .ophoto,.nc:hover{transform:none}
+  .js .colgraf i{transform:none}
+}
+#empresa .stext h2{font-size:clamp(34px,3vw,50px)}
+@media (max-width:900px){.stile h3{font-size:19px}}
+@media (min-width:2200px){.tile::before{width:clamp(46px,2.2vw,72px);height:clamp(46px,2.2vw,72px);margin:calc(clamp(46px,2.2vw,72px)/-2) 0 0 calc(clamp(46px,2.2vw,72px)/-2)}}
+@media (min-width:2200px){#empresa .stext h2{font-size:clamp(58px,2.9vw,100px)}#empresa .wrap.split{padding-right:clamp(20px,14vw,620px)}}
+
+/* fichas de obra e paginas internas: fundo escuro, tudo legivel */
+.sec.ficha{background:var(--dark);color:#F7F5F0}
+.ficha .back{color:#F7F5F0}
+.ficha .finfo h1{color:#F7F5F0}
+.ficha .fmeta{color:var(--txt-d)}
+.ficha .eyebrow{color:var(--gold)}
+.ficha .cer{border-top-color:var(--line-d)}
+.ficha .cer p:not(.eyebrow){color:var(--txt-d)}
+.ficha .gview{background:var(--dark2)}
+.ficha .gnav button{background:transparent;border-color:rgba(247,245,240,.45);color:#F7F5F0;border-radius:50%;transition:background .4s,border-color .4s,color .4s}
+.ficha .gnav button:hover{background:var(--gold);border-color:var(--gold);color:var(--dark)}
+.ficha .gcount{color:var(--txt-d)}
+/* paginas claras (servicos): cards de numero em versao clara */
+.sec:not(.warm):not(.ficha) .nc{background:#fff;border-color:var(--border)}
+.sec:not(.warm):not(.ficha) .nc b{color:var(--ink)}
+.sec:not(.warm):not(.ficha) .nc span{color:var(--graphite)}
+.warm .nc:hover b,.nc:hover b{color:var(--gold)}
+.sec:not(.warm):not(.ficha) .nc:hover b{color:var(--gold-deep)}
+.nc:hover{background:rgba(214,169,95,.06)}
+.top nav a:hover{color:var(--gold)}
