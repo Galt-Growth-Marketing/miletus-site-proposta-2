@@ -521,3 +521,27 @@ h2,.shead h2,#empresa .stext h2,.sector-copy h2,.cbody h2,.ptxt h2,.ctitle{
   .ncards.n5 .nc b i{font-size:1em;margin-left:.15em}
   .ncards.n5 .nc span{font-size:12px}
 }
+
+/* Dobra de contato: cabe inteira em uma tela (desktop, notebook e telas largas) */
+@media (min-width:901px){
+  .contact{min-height:calc(100 * var(--vh, calc(1 * var(--vh, 1vh))) - var(--header));align-items:stretch}
+  .cphoto{min-height:0}
+  .cbody{display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,calc(5 * var(--vh, 1vh)),64px) clamp(40px,calc(5 * var(--vw, 1vw)),72px)}
+  .cbody h2{margin-top:10px}
+  .cbody .sub{margin-top:8px}
+  .cform{margin-top:clamp(16px,calc(2.6 * var(--vh, 1vh)),28px);gap:clamp(8px,calc(1.4 * var(--vh, 1vh)),14px)}
+  .frow{gap:14px}
+  .cform label{gap:4px}
+  .cform input,.cform select{padding:clamp(8px,calc(1.2 * var(--vh, 1vh)),11px) 14px}
+  .cform textarea{padding:10px 14px;height:clamp(64px,calc(11 * var(--vh, 1vh)),112px);min-height:0;resize:vertical}
+  .cform .btn{margin-top:4px}
+  .direct{margin-top:clamp(12px,calc(2 * var(--vh, 1vh)),20px)}
+}
+@media (min-width:901px){
+  .short .cbody h2{font-size:clamp(36px,calc(6.2 * var(--vh, 1vh)),52px)}
+  .short .cform textarea{height:56px}
+  .short .cform input,.short .cform select{padding:8px 14px}
+  .short .cform label{font-size:12px}
+  .short .direct{margin-top:10px}
+  .xshort .cbody .sub{display:none}
+}
