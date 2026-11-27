@@ -108,10 +108,10 @@ h2 b{color:inherit}
   .tile:hover,.stile:hover,.ocard:hover .ophoto,.nc:hover{transform:none}
   .js .colgraf i{transform:none}
 }
-#empresa .stext h2{font-size:clamp(34px,3vw,50px)}
+
 @media (max-width:900px){.stile h3{font-size:19px}}
 @media (min-width:2200px){.tile::before{width:clamp(46px,2.2vw,72px);height:clamp(46px,2.2vw,72px);margin:calc(clamp(46px,2.2vw,72px)/-2) 0 0 calc(clamp(46px,2.2vw,72px)/-2)}}
-@media (min-width:2200px){#empresa .stext h2{font-size:clamp(58px,2.9vw,100px)}#empresa .wrap.split{padding-right:clamp(20px,14vw,620px)}}
+@media (min-width:2200px){#empresa .wrap.split{padding-right:clamp(20px,14vw,620px)}}
 
 /* fichas de obra e paginas internas: fundo escuro, tudo legivel */
 .sec.ficha{background:var(--dark);color:#F7F5F0}
@@ -133,3 +133,391 @@ h2 b{color:inherit}
 .sec:not(.warm):not(.ficha) .nc:hover b{color:var(--gold-deep)}
 .nc:hover{background:rgba(214,169,95,.06)}
 .top nav a:hover{color:var(--gold)}
+
+/* Ajustes de consistência e composição da Proposta 2 */
+:root{
+  --space-section:clamp(54px,5.2vw,82px);
+  --space-section-mobile:42px;
+  
+  --t-card:clamp(19px,1.15vw,24px);
+}
+.sec{padding:var(--space-section) 0}
+.sec.tight{padding:38px 0}
+.shead{margin-bottom:32px}
+.shead h2{margin-top:10px}
+.shead .sub{margin-top:10px}
+#servicos .shead,#obras .shead,.clients .shead{justify-content:center;text-align:center}
+#servicos .shead>div,#obras .shead>div,.clients .shead>div{margin-inline:auto}
+#servicos .shead>.btn,#obras .shead>.btn{position:absolute;right:0;bottom:0}
+.all-works{min-height:50px;padding-inline:26px;border-color:var(--gold)!important;color:var(--gold)!important;font-weight:600;gap:12px}
+.all-works:hover{background:var(--gold)!important;color:var(--dark)!important;transform:translateY(-3px)}
+.nc{position:relative;isolation:isolate;overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .3s}
+.nc::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(215,168,97,.23),rgba(215,168,97,.02) 68%);transition:opacity .25s}
+.nc:hover{transform:translateY(-4px) scale(1.015);border-color:var(--gold)}
+.nc:hover::before{opacity:1}
+.nc{padding:22px 20px}
+.nc b{font-size:clamp(30px,2.2vw,42px)}
+.nc span{line-height:1.4}
+
+/* Setores em bloco editorial com fotografia integral à direita */
+.sectors{display:grid;grid-template-columns:minmax(0,1fr) minmax(38%,.9fr);min-height:560px;position:relative;isolation:isolate;overflow:hidden}
+.sector-copy{padding:clamp(42px,5vw,78px) clamp(24px,5vw,88px);align-self:center}
+.sector-copy h2{font-size:var(--t-section);line-height:1.08;margin-top:12px}
+.sector-copy .sub{max-width:38ch;margin:14px 0 26px}
+.sector-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sector-chip{min-height:88px;padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line-d);background:rgba(247,245,240,.035);font-size:clamp(14px,.95vw,18px);font-weight:500;transition:transform .25s,border-color .25s,background .3s}
+.sector-chip:hover{transform:translateY(-3px);border-color:var(--gold);background:rgba(215,168,97,.11)}
+.sector-photo{position:relative;min-height:100%;overflow:hidden}
+.sector-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.sector-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(29,29,28,.18),transparent 35%)}
+
+/* Imagem institucional em sangria e símbolo idêntico ao arquivo da marca */
+#empresa{min-height:590px;padding:0;display:grid;grid-template-columns:minmax(38%,.88fr) minmax(0,1.12fr);align-items:stretch}
+#empresa .about-photo{min-height:100%;overflow:hidden}
+#empresa .about-photo img{width:100%;height:100%;min-height:590px;object-fit:cover;object-position:center 38%}
+#empresa .wrap.split{width:100%;max-width:none;padding:72px clamp(32px,6vw,110px);grid-template-columns:1fr;gap:0;align-self:center}
+#empresa .stext{max-width:800px;position:relative;z-index:1}
+.colgraf{display:none}
+.colgraf-logo{position:absolute;right:2.5%;bottom:0;width:clamp(110px,12vw,210px);height:75%;object-fit:contain;object-position:bottom center;opacity:.09;pointer-events:none}
+
+#empresa .stext .btn{margin-top:12px}
+
+/* Seções e cartões de obras */
+.ocard .ophoto{overflow:hidden}
+.ocard .otxt{transition:transform .4s ease}
+.ocard:hover .otxt{transform:translateY(-7px)}
+.ocard .more{display:inline-flex;align-items:center;gap:8px;padding:10px 15px;border:1px solid rgba(255,255,255,.7);background:rgba(29,29,28,.2);transition:background .25s,color .25s,border-color .25s,transform .25s}
+.ocard:hover .more{background:var(--gold);border-color:var(--gold);color:var(--dark);transform:translateY(-2px)}
+.clients{padding-top:clamp(42px,4vw,64px);padding-bottom:clamp(42px,4vw,64px)}
+.foot .fgrid{grid-template-columns:minmax(180px,.8fr) 1.2fr 1fr;gap:clamp(28px,4vw,64px);padding-block:72px 64px}
+.foot .flogo{max-width:240px;height:auto}
+.fnav,.fcont{line-height:1.9}
+.foot .fbase{padding-block:22px 26px}
+@media(max-width:900px){
+  :root{--space-section:var(--space-section-mobile);--space-section-mobile:38px;}
+  .sectors{grid-template-columns:1fr;min-height:0}
+  .sector-copy{padding:40px 20px}
+  .sector-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .sector-chip{min-height:66px;padding:10px}
+  .sector-photo{min-height:320px;grid-row:1}
+  #empresa{grid-template-columns:1fr;padding:0}
+  #empresa .about-photo{height:clamp(280px,55vw,460px);min-height:0}
+  #empresa .about-photo img{min-height:0}
+  #empresa .wrap.split{padding:42px 20px}
+  .colgraf-logo{right:4%;height:48%;width:100px}
+  #servicos .shead,#obras .shead,.clients .shead{align-items:center}
+  #servicos .shead>.btn,#obras .shead>.btn{position:static}
+  .foot .fgrid{grid-template-columns:1fr 1fr;padding-block:44px 36px}
+  .foot .flogo{grid-column:1/-1}
+}
+@media(max-width:560px){
+  .sec{padding:36px 0}
+  .sec.tight{padding:26px 0}
+  .shead{margin-bottom:22px}
+  .ncards.n5{gap:8px}
+  .ncards.n5 .nc:last-child{grid-column:auto}
+  .nc{padding:16px 12px}
+  .nc b{font-size:clamp(24px,7vw,30px)}
+  .nc span{font-size:12px}
+  .sector-photo{min-height:250px}
+  .sector-copy{padding:34px 18px}
+  #empresa .about-photo{height:280px}
+  #empresa .wrap.split{padding:34px 18px}
+  
+  .foot .fgrid{grid-template-columns:1fr}
+  .foot .flogo{grid-column:auto}
+}
+@media(min-width:2200px){
+  .sec{padding:clamp(72px,4.2vw,110px) 0}
+  .sectors{min-height:clamp(600px,42vw,860px)}
+  #empresa{min-height:clamp(640px,42vw,900px)}
+  #empresa .about-photo img{min-height:clamp(640px,42vw,900px)}
+  #empresa .wrap.split{padding-inline:clamp(60px,7vw,160px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .nc,.sector-chip,.all-works,.ocard .more{transition:none}
+  .nc:hover,.sector-chip:hover,.all-works:hover{transform:none}
+}
+
+/* Escala tipográfica responsiva entre notebook, desktop e ultrawide */
+:root{
+  
+  --t-section:clamp(2rem, calc(1.25rem + 2.65vw), 7rem);
+  --t-section-sub:clamp(1.0625rem, calc(.875rem + .55vw), 2rem);
+  --t-page:clamp(44px,calc(2.9vw + 8px),96px);
+  --t-lead:clamp(18px,calc(.95vw + 5px),34px);
+  --t-body:clamp(16px,calc(.55vw + 7px),25px);
+  --t-small:clamp(13px,calc(.35vw + 8px),20px);
+}
+h2,.shead h2,#empresa .stext h2,.sector-copy h2,.cbody h2,.ptxt h2,.ctitle{
+  font-size:var(--t-section);
+  line-height:1.08;
+}
+.phero h1,.finfo h1{font-size:var(--t-page);line-height:1.08}
+.sub,.desc,.stext p:not(.eyebrow):not(.lead),.lead,.cer p:not(.eyebrow),.cbody .sub{
+  font-size:var(--t-body);
+  line-height:1.55;
+}
+.frase,.stext .lead,.phero .lead{font-size:var(--t-lead);line-height:1.45}
+@media(max-width:1100px){
+  :root{
+    
+    --t-page:clamp(38px,5vw,54px);
+    --t-lead:clamp(18px,2.2vw,22px);
+    --t-body:clamp(15px,1.65vw,18px);
+    --t-small:14px;
+  }
+}
+@media(max-width:600px){
+  :root{
+    
+    --t-page:clamp(34px,9vw,42px);
+    --t-lead:18px;
+    --t-body:16px;
+    --t-small:13px;
+  }
+  .shead h2,.stext h2,.cbody h2{line-height:1.12}
+}
+
+/* Mesma hierarquia para as introducoes das secoes da Home. */
+.shead .sub, .sector-copy .sub, #empresa .stext .lead, .cbody .sub {
+  font-size: var(--t-section-sub);
+  line-height: 1.45;
+}
+#empresa .stext {
+  max-width: 64em;
+}
+#empresa .stext h2 {
+  max-width: 23ch;
+  text-wrap: balance;
+}
+#empresa .stext p:not(.eyebrow) {
+  max-width: 60ch;
+}
+
+/* Cabecalhos editoriais e acesso ao portfolio */
+:is(#servicos, #obras, .clients) .shead .eyebrow {
+  justify-content: center;
+}
+#servicos .shead { position: relative; }
+.works-action {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(24px, 2vw, 48px);
+}
+.sector-chip { flex-direction: column; gap: .45em; }
+.sector-icon {
+  width: clamp(22px, 1.6vw, 34px);
+  height: auto;
+  color: var(--gold);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.colgraf-logo {
+  width: clamp(180px, 24vw, 740px);
+  height: 84%;
+  right: 1%;
+}
+@media (max-width: 900px) {
+  .colgraf-logo { width: clamp(158px, 40vw, 300px); height: 45%; }
+}
+
+/* A mesma silhueta da marca aparece da base ao capitel. */
+.tile::before, .tile:hover::before {
+  opacity: 0;
+  clip-path: inset(100% 0 0);
+  transform: none;
+}
+.tile:focus-visible::before {
+  opacity: 1;
+  clip-path: inset(0);
+}
+@media (hover: hover) {
+  .tile:hover::before { opacity: 1; clip-path: inset(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tile::before { transition: clip-path .65s cubic-bezier(.2,.75,.22,1), opacity .15s; }
+  .sectors.topo::before {
+    inset: -24px;
+    translate: var(--map-x, 0px) var(--map-y, 0px);
+    transition: translate .65s ease-out;
+    animation: contour-drift 12s ease-in-out infinite alternate;
+  }
+  @keyframes contour-drift {
+    from { transform: translate(-6px, -6px); }
+    to { transform: translate(6px, 6px); }
+  }
+  .btn .ico, .more .ico { transition: translate .3s ease; }
+  .btn:is(:hover,:focus-visible) .ico, .ocard:is(:hover,:focus-visible) .ico { translate: 4px 0; }
+  .sector-icon { transition: transform .35s ease; }
+  .sector-chip:hover .sector-icon { transform: translateY(-2px); }
+}
+
+/* Navigation rhythm and compact header */
+.top .bar { column-gap: clamp(24px, 3vw, 80px); }
+.top .nl, .top .nr { margin-inline: 0; }
+.top .bar nav ul { gap: clamp(20px, 2vw, 56px); }
+.top .bar nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.top .logo { display: inline-flex; min-height: 44px; align-items: center; }
+.top.compact .bar { height: clamp(64px, 3.4vw, 96px); }
+.top.compact .logo img { height: clamp(34px, 1.85vw, 54px); }
+.top :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+@media (max-width: 900px) {
+  .top .bar { grid-template-columns: minmax(0, 1fr) auto; gap: 16px; }
+  .top .mmenu ul { display: block; }
+  .top .mmenu { max-height: calc(100dvh - var(--header)); overflow-y: auto; }
+  .top .mmenu a { display: flex; min-height: 48px; }
+  .top.open .mmenu { display: block; }
+}
+@media (min-width: 901px) { .top .mmenu { display: none; } }
+
+/* As unidades acompanham o valor mesmo quando a coluna da ficha estreita. */
+.finfo .ncards.n3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr)); }
+.finfo .nc b { white-space: normal; font-variant-numeric: tabular-nums; }
+.finfo .nc b i { display: inline-block; font-size: .62em; }
+@media (max-width: 600px) {
+  .finfo .ncards.n3 { grid-template-columns: 1fr; gap: 6px; }
+  .finfo .nc { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px; }
+  .finfo .nc b { flex-shrink: 0; }
+  .finfo .nc span { margin: 0; text-align: right; }
+}
+
+.card-pagination { display: none; }
+@media (max-width: 900px) {
+  .tiles5, .ogrid { scroll-padding-inline: 20px; }
+  .card-pagination:not([hidden]) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+  }
+  .card-pagination button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  .card-pagination button::after {
+    content: '';
+    width: 16px;
+    height: 3px;
+    border-radius: 2px;
+    background: #817e79;
+  }
+  .card-pagination button[aria-current]::after { width: 32px; background: #946b32; }
+  .card-pagination button:focus-visible { outline: 2px solid #946b32; outline-offset: -4px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .card-pagination button::after { transition: width .2s ease, background-color .2s ease; }
+  }
+}
+
+.sector-sparks { opacity: 0; stroke-width: 1.1; }
+@media (prefers-reduced-motion: no-preference) {
+  .sector-chip.is-drawing .sector-stroke {
+    stroke-dasharray: 1;
+    animation: sector-draw .55s ease-out var(--delay) both;
+  }
+  .sector-chip.is-drawing .sector-bolt {
+    transform-origin: 50% 50%;
+    animation: bolt-kick .48s ease-out .35s;
+  }
+  .sector-chip.is-drawing .sector-sparks {
+    transform-origin: 50% 50%;
+    animation: spark-out .4s ease-out .48s both;
+  }
+  @keyframes sector-draw {
+    from { stroke-dashoffset: 1; opacity: 0; }
+    to { stroke-dashoffset: 0; opacity: 1; }
+  }
+  @keyframes bolt-kick {
+    35% { transform: translate(.5px,-1px) rotate(5deg); }
+    68% { transform: rotate(-3deg); }
+  }
+  @keyframes spark-out {
+    0% { opacity: 0; transform: scale(.72); }
+    35% { opacity: .95; }
+    100% { opacity: 0; transform: scale(1.06); }
+  }
+}
+
+/* Mobile: keep swipe tracks steady and size each work card around its copy. */
+@media (max-width: 900px) {
+  .tiles5, .ogrid {
+    gap: 16px;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+  }
+  .tiles5 > .tile, .ogrid > .ocard { flex-basis: 86%; min-width: 0; }
+  .js :is(.tiles5, .ogrid) > .rv {
+    opacity: 1;
+    transform: none;
+  }
+  .ogrid .ophoto {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(280px, 78vw, 380px);
+    aspect-ratio: auto;
+  }
+  .ogrid .otxt {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    padding: 24px 20px;
+    transform: none;
+  }
+  .ogrid .otxt h3 { font-size: clamp(21px, 5.2vw, 25px); }
+  .ogrid .ophoto .shade {
+    background: linear-gradient(0deg, rgba(18,18,17,.92), rgba(18,18,17,.68) 55%, rgba(18,18,17,.14));
+  }
+  .sector-grid { gap: 12px; }
+  .sector-chip { min-height: 84px; padding: 14px 8px; gap: 8px; }
+  .contact { gap: 0; background: var(--dark); }
+  .contact .cphoto img {
+    transform: none !important; /* Desktop parallax writes an inline transform. */
+    clip-path: none;
+  }
+
+  .tiles5 .tile.is-current img { filter: none; }
+  .tiles5 .tile.is-current::before {
+    opacity: 1;
+    clip-path: inset(0);
+  }
+  .tiles5 .tile:not(.is-current):hover img { filter: grayscale(1) contrast(1.05); }
+  .tiles5 .tile:not(.is-current):not(:focus-visible)::before { opacity: 0; clip-path: inset(100% 0 0); }
+}
+
+@media (max-width: 600px) {
+  .hero2 .stxt { width: 100%; padding-inline: 16px; }
+  .hero2 .big {
+    width: 100%;
+    font-size: clamp(32px, 9vw, 42px);
+    line-height: 1.08;
+    margin-bottom: 18px;
+  }
+  .hero2 .big > span { display: block; text-wrap: balance; }
+  .hero2 .lead { width: 100%; max-width: 34ch; }
+  .hero2 .hcta { margin-top: 24px; }
+}
+
+/* pagina Obras no celular: lista vertical, sem carrossel */
+@media (max-width:900px){
+  .plist .ogrid{display:grid;grid-template-columns:1fr;overflow:visible;margin:0;padding:0}
+}
+
+/* Celular estreito: numero e unidade sempre cabem no card, 5o card na linha inteira */
+@media (max-width:560px){
+  .ncards.n5{gap:8px}
+  .ncards.n5 .nc{padding:16px 12px;min-width:0}
+  .ncards.n5 .nc:last-child{grid-column:1/-1}
+  .ncards.n5 .nc b{font-size:clamp(19px,6.2vw,28px);white-space:nowrap}
+  .ncards.n5 .nc b i{font-size:1em;margin-left:.15em}
+  .ncards.n5 .nc span{font-size:12px}
+}

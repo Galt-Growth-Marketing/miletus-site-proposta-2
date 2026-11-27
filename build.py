@@ -47,6 +47,28 @@ SETORES = [("Infraestrutura", "setor-infraestrutura.jpg"), ("Rodoviário", "seto
            ("Construtoras", "setor-construtoras.jpg"), ("Consultorias", "setor-consultorias.jpg"),
            ("Energia", "setor-energia.jpg"), ("Mineração", "mineracao-mina-ceu-aberto.jpg")]
 
+# Pictogramas em uma grade comum de 24 unidades.
+SECTOR_PATHS = {
+    "Infraestrutura": ("M5 21V5", "M19 21V5", "M2 16h20", "M5 6q7 13 14 0", "M9 11v5 M15 11v5"),
+    "Rodoviário": ("M3 21 8 3", "M21 21 16 3", "M12 4v3", "M12 10v4", "M12 17v4"),
+    "Construtoras": ("M3 21h18", "M6 21V7 M11 21V3", "M3 7l8-4 9 4H3", "M17 7v5q0 3 3 2"),
+    "Consultorias": ("M5 3h10l4 4v14H5z", "M14 3v5h5", "M8 12h7", "M8 16h5"),
+    "Energia": ("M14 2 4 14h7l-1 8 10-13h-7z",),
+    "Mineração": ("M2 20 9 7l4 7", "M12 16l4-7 6 11", "M22 20H2", "M7 11l2 2 2-2"),
+}
+
+def sector_chip(name):
+    strokes = ''.join(
+        f'<path class="sector-stroke" pathLength="1" d="{path}" style="--delay:{i * 95}ms"/>'
+        for i, path in enumerate(SECTOR_PATHS[name])
+    )
+    accents = ''
+    if name == "Energia":
+        strokes = f'<g class="sector-bolt">{strokes}</g>'
+        accents = '<path class="sector-sparks" d="M4 6 2.5 4.5 M19 5l1.5-1.5 M20 16l1.8 1 M4 18l-1.5 1"/>'
+    icon = f'<svg class="sector-icon" viewBox="0 0 24 24" aria-hidden="true">{strokes}{accents}</svg>'
+    return f'<div class="sector-chip">{icon}<span>{name}</span></div>'
+
 # Imagens de banco (Wikimedia Commons). As licenças CC BY / CC BY-SA exigem crédito: ver creditos.html.
 CREDITOS = [
     ("Setor Infraestrutura", "Zhijiang Bridge", "Charlie fong", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Zhijiang_Bridge.jpg"),
@@ -164,8 +186,8 @@ def header(root, ativo):
 <div class="lside"><nav class="nl"><ul>{''.join(lis[:2])}</ul></nav></div>
 <a href="{root}index.html" class="logo"><img src="{root}assets/logo-h-dark.png" alt="Miletus Engenharia"></a>
 <div class="nr"><nav><ul>{''.join(lis[2:4])}</ul></nav></div>
-<button class="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
-<div class="mmenu"><ul>{''.join(lis[:4])}</ul></div></header><main id="conteudo">'''
+<button class="burger" aria-label="Abrir menu" aria-controls="menu-mobile" aria-expanded="false"><span></span><span></span><span></span></button></div>
+<nav class="mmenu" id="menu-mobile" aria-label="Menu principal"><ul>{''.join(lis)}</ul></nav></header><main id="conteudo">'''
 
 def footer(root):
     links = [("Home", "index.html"), ("Serviços", "servicos.html"), ("Obras", "portfolio.html"), ("Empresa", "index.html#empresa"), ("Contato", "index.html#contato")]
@@ -220,7 +242,7 @@ def form():
 # ----------------------------------------------------------------- páginas
 def index():
     serv = ''.join(svc_tile(s) for s in SERVICOS)
-    set_ = ''.join(f'<div class="stile"><img src="{IMG}{im}" alt="" loading="lazy"><span class="shade"></span><h3>{n}</h3><span class="sline"></span></div>' for n, im in SETORES)
+    set_ = ''.join(sector_chip(name) for name, _ in SETORES)
     obras = ''.join(obra_card(next(o for o in OBRAS if o["slug"] == s)) for s in OBRAS_HOME)
     logos = ''.join(f'<span class="lg"><img src="assets/logos/{f}" alt="" loading="lazy"></span>' for f in LOGOS)
     return head("Miletus Engenharia | Pontes, contenções, barragens e infraestrutura",
@@ -232,22 +254,22 @@ def index():
 <section class="sec" id="servicos"><div class="wrap"><div class="shead"><div>{eyebrow("O que entregamos")}<h2>Nossos <b>serviços</b></h2><p class="sub">O que cada serviço entrega para a sua obra.</p></div>
 <a class="btn ghost" href="servicos.html">Ver todos os serviços</a></div><div class="tiles5">{serv}</div></div></section>
 
-<section class="sec warm topo"><div class="wrap"><div class="shead"><div>{eyebrow("Onde atuamos")}<h2>Setores <b>atendidos</b></h2></div></div><div class="stiles">{set_}</div></div></section>
+<section class="sectors warm topo"><div class="sector-copy"><div>{eyebrow("Onde atuamos")}<h2>Setores <b>atendidos</b></h2><p class="sub">Atuação técnica em diferentes segmentos de infraestrutura.</p></div><div class="sector-grid">{set_}</div></div><div class="sector-photo"><img src="{IMG}setor-infraestrutura.jpg" alt="Ponte Zhijiang sobre o rio" loading="lazy"></div></section>
 
-<section class="sec" id="obras"><div class="wrap"><div class="shead"><div>{eyebrow("Portfólio")}<h2>Obras de <b>referência</b></h2></div><a class="btn ghost" href="portfolio.html">Ver todas as obras</a></div>
-<div class="ogrid">{obras}</div></div></section>
+<section class="sec" id="obras"><div class="wrap"><div class="shead"><div>{eyebrow("Portfólio")}<h2>Obras de <b>referência</b></h2></div></div>
+<div class="ogrid">{obras}</div><div class="works-action"><a class="btn" href="portfolio.html">Ver todas as obras {ARROW}</a></div></div></section>
 
-<section class="sec warm" id="empresa"><div class="colgraf" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="wrap split"><div class="sphoto"><img src="{IMG}team-1920.jpg" alt="Equipe da Miletus Engenharia em obra"></div>
+<section class="sec warm about" id="empresa"><img class="colgraf-logo" src="assets/coluna.png" alt="" aria-hidden="true"><div class="about-photo"><img src="{IMG}team-1920.jpg" alt="Equipe da Miletus Engenharia em obra" loading="lazy"></div><div class="wrap split">
 <div class="stext">{eyebrow("Quem somos")}<h2>Grandes estruturas pedem <b>engenharia à altura.</b></h2><p class="lead">Rigor técnico e segurança em cada decisão, do primeiro cálculo à última inspeção.</p>
 <p>Com mais de dez anos de experiência em barragens e projetos estruturais, levamos aos nossos clientes precisão nas soluções, previsibilidade de custo e prazo e a confiança de uma estrutura bem resolvida.</p>
 <a class="btn" href="#contato">Conheça a Miletus</a></div></div></section>
 
-<section class="sec"><div class="wrap"><div class="shead"><div>{eyebrow("Clientes")}<h2>Quem confia <b>na gente</b></h2></div></div></div>
+<section class="sec clients"><div class="wrap"><div class="shead"><div>{eyebrow("Clientes")}<h2>Quem confia <b>na gente</b></h2></div></div></div>
 <div class="loop"><div class="track">{logos}{logos}</div></div></section>
 
 <section class="contact" id="contato"><div class="cphoto"><img src="{IMG}01_drone-barragens-santa-barbara-entre-cafezais.jpg" alt=""></div>
 <div class="cbody">{eyebrow("Contato")}<h2>Fale com um <b>especialista</b></h2><p class="sub">Conte qual é a estrutura e em que momento está a obra.</p>{form()}
-<p class="direct"><a href="{WHATS}" target="_blank" rel="noopener">WhatsApp {TEL}</a> · <a href="mailto:{MAIL}">{MAIL}</a></p></div></section>
+</div></section>
 ''' + footer("")
 
 def servicos():
@@ -266,7 +288,7 @@ def portfolio():
     cards = ''.join(obra_card(o) for o in OBRAS)
     return (head("Obras | Miletus Engenharia", "Projetos e supervisões da Miletus em pontes, contenções, edificações e barragens.", "") + header("", "Obras")
             + page_hero("Obras", "Obras", "Projetos e supervisões da Miletus em pontes, contenções, edificações e barragens.", "hero-piraque-1920.jpg")
-            + f'<section class="sec"><div class="wrap"><div class="ogrid">{cards}</div><div class="cta"><a class="btn" href="index.html#contato">Falar com um especialista</a></div></div></section>'
+            + f'<section class="sec plist"><div class="wrap"><div class="ogrid">{cards}</div><div class="cta"><a class="btn" href="index.html#contato">Falar com um especialista</a></div></div></section>'
             + footer(""))
 
 def ficha(o):
